@@ -5,10 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import holon.api.http.Content;
 import holon.api.http.GET;
 import holon.api.http.Request;
-import holon.contrib.caching.Cached;
 import holon.contrib.template.Templates;
 import unarmed.domain.Counties;
-import unarmed.web.endpoint.api.GeoEndpoint;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -28,7 +26,7 @@ public class FrontpageEndpoint
     }
 
     @GET("/")
-    @Cached(cacheKey= GeoEndpoint.GEOMAP_CACHE_KEY)
+//    @Cached(cacheKey= GeoEndpoint.GEOMAP_CACHE_KEY)
     public void frontpage(Request request, Connection conn, Counties counties) throws SQLException, IOException
     {
         String json = new ObjectMapper().writer().writeValueAsString( counties.allCountiesGeodata( conn, Calendar.getInstance().get(Calendar.YEAR) ) );

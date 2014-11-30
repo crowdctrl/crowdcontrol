@@ -8,8 +8,11 @@ import holon.api.config.Setting;
 import holon.contrib.caching.HttpCache;
 import unarmed.domain.Counties;
 import unarmed.domain.Reports;
-import unarmed.domain.subscriptions.Subscriptions;
 import unarmed.domain.auth.Users;
+import unarmed.domain.subscriptions.Subscriptions;
+import unarmed.infrastructure.geo.CountyLoader;
+import unarmed.infrastructure.geo.StateLoader;
+import unarmed.infrastructure.geo.ZipCodeLoader;
 
 import java.nio.file.Path;
 import java.util.Collection;
@@ -32,8 +35,15 @@ public class Unarmed implements Application
         public static Setting<Path> cache_path = setting( "unarmed.cache_path", path(), defaultValue("/tmp/.unarmed_cache") );
     }
 
-    public static void main(String ... args) throws Exception
+    public static void main(String ... args) throws Throwable
     {
+        if(args.length == 1 && args[0].equals( "load-initial-data" ))
+        {
+            StateLoader.main( args );
+            CountyLoader.main( args );
+            ZipCodeLoader.main( args );
+            return;
+        }
         Holon.run( Unarmed.class );
     }
 

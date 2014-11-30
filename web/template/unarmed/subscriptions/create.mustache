@@ -1,0 +1,55 @@
+{{! create.mustache }}
+{{<../base}}
+{{$content}}
+<h1>Subscribe to updates</h1>
+<form role="form" class="form-horizontal" action="" method="POST">
+    <h3>What are you interested in?</h3>
+    <div class="form-group">
+        <label for="zips" class="col-sm-2 control-label">Subscribe to reports</label>
+        <div class="col-sm-8">
+            <input type="checkbox" class="form-control" id="reports" name="reports" checked>
+            <p class="help-block">Get updates when new reports are added to the database.</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="zips" class="col-sm-2 control-label">Zipcodes</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="zips" name="zips" placeholder="12345,12234">
+            <p class="help-block">Optional, filter events you subscribe to by zipcode. You can add multiple zipcodes
+                by separating them with commas.
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="zips" class="col-sm-2 control-label">States</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="states" name="states" placeholder="MO,CO">
+            <p class="help-block">Optional, filter events you subscribe to by state. You can add multiple states
+                by separating them with commas.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="zips" class="col-sm-2 control-label">Subscribe to newsletter</label>
+        <div class="col-sm-8">
+            <input type="checkbox" class="form-control" id="newsletter" name="newsletter" checked>
+            <p class="help-block">Optional, get updates about new features added to the site and other content
+                related to Crowd Control.
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="victim-name" class="col-sm-2 control-label">Email address</label>
+        <div class="col-sm-8">
+            <input type="email" class="form-control" id="email" name="email" placeholder="mary@email.com">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Subscribe</button>
+        </div>
+    </div>
+</form>
+{{/content}}
+{{/../base}}

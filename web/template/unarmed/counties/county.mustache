@@ -1,0 +1,22 @@
+{{! county.mustache }}
+{{<../base}}
+{{$extra_header}}
+<script src="/js/dateformat.min.js" charset="utf-8"></script>
+{{/extra_header}}
+{{$content}}
+    <h1>{{county.name}}</h1>
+    <h3>{{county.stateName}}</h3>
+    <a href="/">Back to frontpage</a>
+    <ul>
+        {{#county.reports}}
+            <li>
+                <h4>{{#dateFormat}}dd MMM yyyy|{{occurredAtTime}}{{/dateFormat}}</h4>
+                <p>{{description}}</p>
+            </li>
+        {{/county.reports}}
+    </ul>
+    {{^county.reports}}
+    <p>Thankfully, there were have been no reports in this county.</p>
+    {{/county.reports}}
+{{/content}}
+{{/../base}}

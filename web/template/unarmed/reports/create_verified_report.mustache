@@ -1,0 +1,58 @@
+{{! create_verified_report.mustache }}
+{{<../base}}
+  {{$content}}
+    <h1>Create verified report</h1>
+    {{#template}}
+        <p>Create verified report based on <a href="/reports/unverified/{{template.id}}">{{template.id}}</a></p>
+    {{/template}}
+    <a href="/admin">Back to admin dashboad</a>
+    <form role="form" class="form-horizontal" action="/reports/verified" method="POST">
+        <input type="hidden" name="basedOn" value="{{template.id}}">
+        <h3>Report contents</h3>
+        <div class="form-group">
+            <label for="victim-name" class="col-sm-2 control-label">Name &amp; age</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="victim-name" name="name" placeholder="John Doe"
+                       value="{{template.victimName}}">
+            </div>
+            <div class="col-sm-2">
+                <input type="number" class="form-control" id="victim-age" name="age" placeholder="22"
+                       value="{{template.victimAge}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address-state" class="col-sm-2 control-label">Zipcode</label>
+
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="address-zip" name="zip" value="{{template.zip}}" placeholder="11288">
+            </div>
+            {{#template}}
+                <div class="col-sm-4">
+                    <p>County: {{template.countyName}}</p>
+                </div>
+            {{/template}}
+        </div>
+        <div class="form-group">
+            <label for="desc-day" class="col-sm-2 control-label">Date</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="desc-date" name="date"
+                       value="{{#template}}{{#dateFormat}}dd/MM/yyyy|{{occurredAtTime}}{{/dateFormat}}{{/template}}"
+                       placeholder="24/12/2010">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="desc-day" class="col-sm-2 control-label">Description</label>
+
+            <div class="col-sm-10">
+                <textarea class="form-control" id="desc-date" rows="3" name="description" placeholder="Police pulled Johns car over, a struggle ensued and John was fatally shot.">{{template.description}}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit report</button>
+            </div>
+        </div>
+    </form>
+  {{/content}}
+{{/../base}}

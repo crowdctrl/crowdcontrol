@@ -1,0 +1,10 @@
+{
+  "application" : {
+    "name" : "unarmed",
+    "middleware" : [
+      "holon.contrib.session.SimpleSessionMiddleware",
+      "unarmed.web.middleware.TransactionMiddleware",
+      "unarmed.web.middleware.AuthenticationMiddleware"
+    ]
+  }
+}

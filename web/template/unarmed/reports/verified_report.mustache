@@ -1,0 +1,24 @@
+{{! verified_report.mustache }}
+{{<../base}}
+
+{{$extra_header}}
+<script src="/js/dateformat.min.js" charset="utf-8"></script>
+{{/extra_header}}
+
+{{$content}}
+<h1>Verified report - {{report.id}}</h1>
+<a href="/admin">Back to admin dashboad</a>
+<h3>Description</h3>
+<p>{{report.description}}</p>
+<p><b>Zipcode: </b>{{report.zip}}</p>
+<p><b>Date & Time: </b><span id="desc-date"></span> <span id="desc-time"></span></p>
+{{#report.basedOnUnverifiedReport}}
+    <a href="/reports/unverified/{{report.basedOnUnverifiedReport}}">This was based on user-submitted report #{{report.basedOnUnverifiedReport}}</a>
+{{/report.basedOnUnverifiedReport}}
+<script type="application/javascript">
+    var templateTime = {{report.occurredAtTime}};
+    $("#desc-date").html(DateFormat.format.date(templateTime, "dd/MM/yyyy"));
+    $("#desc-time").html(DateFormat.format.date(templateTime, "hh:mma"));
+</script>
+{{/content}}
+{{/../base}}

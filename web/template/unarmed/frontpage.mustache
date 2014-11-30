@@ -1,0 +1,97 @@
+{{! frontpage.mustache }}
+{{<base}}
+  {{$extra_header}}
+  <script src="js/d3.min.js" charset="utf-8"></script>
+  <script src="js/topojson.js" charset="utf-8"></script>
+  <script src="js/simple-map-d3.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="css/simple-map-d3.css">
+  <link rel="stylesheet" href="css/hint.min.css">
+  {{/extra_header}}
+
+  {{$baseContent}}
+  <main>
+      <div class="container">
+        <div class="row">
+            <!-- Map -->
+            <div class="col-sm-12">
+                <div id="frontpage-map" style="width: 100%; height: 700px; margin: 0 0 1em 0;"></div>
+            </div>
+        </div>
+    </div>
+  </main>
+  <article>
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-7">
+                  <h1 id="big-report-counter">Loading..</h1>
+                  <p>Have been reported killed by police this year.</p>
+                  <h3>Help out</h3>
+                  <p>This database is maintained and populated by volunteers. Your help <a
+                          href="/reports/create">reporting</a> events is invaluable. The site itself is open for
+                      contributions, please read more on <a href="http://github.com/crowdctrl/website">Github</a>.</p>
+              </div>
+              <div class="col-sm-5">
+                  <h3>About</h3>
+                  <p>Crowd Control is an open database of crowd sourced, verified,
+                      events involving lethal violence by police.</p>
+                  <p>We launched recently, bear with us as we expand the database and its
+                      functionality. If you believe what we are doing is important,
+                      consider <a href="/subscription/create">subscribing</a> to updates.</p>
+                  <h4>License</h4>
+                  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons
+                  License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br/> Unless otherwise stated, this work is licensed under a <a rel="license"href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+              </div>
+          </div>
+      </div>
+  </article>
+  <article>
+      <div class="container">
+
+          <div class="row">
+
+          </div>
+      </div>
+  </article>
+  <script type="application/javascript">
+        var data = {{{geodata}}};
+
+        var counties = data.objects.counties.geometries;
+        var total = 0;
+        for( var i=0; i<counties.length; i++)
+        {
+            total += counties[i].properties.numberOfReports;
+        }
+
+        if(total == 1)
+        {
+            $("#big-report-counter").text("One person");
+        }
+        else if(total == 0)
+        {
+            $("#big-report-counter").text("No one");
+        }
+        else
+        {
+            $("#big-report-counter").text(total + " people");
+        }
+
+        for( var i=0; i<counties.length; i++)
+        {
+            var props = counties[i].properties;
+            props.color = Math.max(1, (props.numberOfReports / total) * 100);
+        }
+
+        var map = new SimpleMapD3({
+            container: '#frontpage-map',
+            data: data,
+            colorOn: true,
+            colorProperty: "numberOfReports",
+            colorScale : "quantize",
+            tooltipOn: false,
+            legendOn: false,
+            colorSet: "YlGn"
+        });
+    </script>
+  <div id="tooltip"></div>
+  {{/baseContent}}
+{{/base}}

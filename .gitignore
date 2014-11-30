@@ -1,0 +1,5 @@
+.idea
+neo4j
+*.iml
+target
+.DS_store

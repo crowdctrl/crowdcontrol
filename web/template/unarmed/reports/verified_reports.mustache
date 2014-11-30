@@ -1,0 +1,14 @@
+{{! reports.mustache }}
+{{<../base}}
+{{$content}}
+<h1>Verified reports</h1>
+<a href="/admin">Back to admin dashboad</a>
+<ul>
+  {{#reports}}
+      <li><a href="/reports/verified/{{id}}">{{#dateFormat}}EEE, dd MMM yyyy|{{occurredAtTime}}
+      {{/dateFormat}}</a>
+          {{victimName}}{{^victimName}}Unnamed{{/victimName}} in {{zip}}</li>
+  {{/reports}}
+</ul>
+{{/content}}
+{{/../base}}

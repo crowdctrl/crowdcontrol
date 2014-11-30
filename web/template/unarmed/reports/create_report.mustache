@@ -1,0 +1,74 @@
+{{! reports.mustache }}
+{{<../base}}
+{{$content}}
+<h1>Report incident</h1>
+<a href="/">Back to frontpage</a>
+<p>Thank you for helping out!</p>
+<form role="form" class="form-horizontal" action="/reports" method="POST" enctype="multipart/form-data">
+    <h3>Who was the victim?</h3>
+    <div class="form-group">
+        <label for="victim-name" class="col-sm-2 control-label">Name &amp; age</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="victim-name" name="name" placeholder="John Doe">
+            <p class="help-block">(Optional)</p>
+        </div>
+        <div class="col-sm-2">
+            <input type="number" class="form-control" id="victim-age" name="age" placeholder="22">
+            <p class="help-block">(Optional)</p>
+        </div>
+    </div>
+    <h3>Where did this happen?</h3>
+    <div class="form-group">
+        <label for="address-state" class="col-sm-2 control-label">Zip code</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="address-zip" name="zip" placeholder="11288">
+        </div>
+    </div>
+    <h3>What happened, and when?</h3>
+    <div class="form-group">
+        <label for="desc-day" class="col-sm-2 control-label">Date</label>
+
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="desc-date" name="date" placeholder="24/12/2010 (dd/mm/yyyy)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="desc-day" class="col-sm-2 control-label">Brief description</label>
+
+        <div class="col-sm-10">
+            <textarea class="form-control" id="desc-date" rows="3" name="description" placeholder="Police pulled Johns car over, a struggle ensued and John was fatally shot."></textarea>
+        </div>
+    </div>
+
+    <h3>Please help us verify this</h3>
+    <p>All submitted reports are reviewed before they are published, to make sure the database remains accurate.</p>
+    <div class="form-group">
+        <label for="report-attachment" class="col-sm-2 control-label">Contact email</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="email" id="report-email" name="email" placeholder="clara@gmail.com">
+            <p class="help-block">This is optional, but if you would, provide us with an email to contact you.
+                We will not contact you for any reason other than to verify the report.</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="report-links" class="col-sm-2 control-label">News articles</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="report-links" name="links" placeholder="http://newsdesk.com/12345, http://blogging.org/article23">
+            <p class="help-block">If you know of any, please provide links to news articles or other resources to verify. If there are several, separate them with commas.</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="report-attachment" class="col-sm-2 control-label">Attachment</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="file" id="report-attachment" name="attachment">
+          <p class="help-block">If you have access to it, please include a scan or a picture of the police report.</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit report</button>
+        </div>
+    </div>
+</form>
+{{/content}}
+{{/../base}}

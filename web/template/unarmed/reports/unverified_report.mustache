@@ -1,0 +1,28 @@
+{{! unverified_report.mustache }}
+{{<../base}}
+{{$content}}
+<h1>Unverified report - {{report.id}}</h1>
+<a href="/admin">Back to admin dashboad</a>
+<p><b>Victim: </b>{{report.victimName}} ({{report.victimAge}})</p>
+<p><b>Zipcode: </b>{{report.zip}}</p>
+<p><b>Submitted: </b>{{#dateFormat}}EEE, dd MMM yyyy|{{report.submitTime}}{{/dateFormat}}</p>
+<p><b>Occurred: </b>{{#dateFormat}}EEE, dd MMM yyyy|{{report.occurredAtTime}}{{/dateFormat}}</p>
+<p><b>Links for evidence: </b>{{report.links}}{{^report.links}}None{{/report.links}}</p>
+<h3>Description</h3>
+<p>{{report.description}}</p>
+<h3>Attachments</h3>
+<ul>
+    {{#report.attachments}}
+    <li><a href="/reports/{{report.id}}/attachment/{{id}}">{{name}}</a></li>
+    {{/report.attachments}}
+</ul>
+{{#report.leadToVerifiedReport}}
+    <a href="/reports/verified/{{report.leadToVerifiedReport}}">This report lead to verified report #{{report.leadToVerifiedReport}}</a>
+{{/report.leadToVerifiedReport}}
+<a href="/reports/verified/create?template={{report.id}}">Create verified report from this</a>
+
+<form action="/reports/unverified/{{report.id}}/archive" method="POST">
+    <input type="submit" value="Archive this report" />
+</form>
+{{/content}}
+{{/../base}}

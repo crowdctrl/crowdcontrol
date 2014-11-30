@@ -33,6 +33,7 @@ public class Unarmed implements Application
         public static Setting<Path> report_path = setting( "unarmed.report_path", path(), defaultValue("/tmp/upload") );
         public static Setting<String> dbUrl = setting( "unarmed.db", string(), defaultValue("jdbc:neo4j://localhost:7474") );
         public static Setting<Path> cache_path = setting( "unarmed.cache_path", path(), defaultValue("/tmp/.unarmed_cache") );
+        public static Setting<String> admin_pwd = setting( "unarmed.admin_pwd", string(), defaultValue("admin") );
     }
 
     public static void main(String ... args) throws Throwable
@@ -55,7 +56,7 @@ public class Unarmed implements Application
         ds.setJdbcUrl( config.get( Configuration.dbUrl ) );
 
         Users users = new Users(ds);
-        users.ensureAdminExists( "admin", "admin" );
+        users.ensureAdminExists( "admin", config.get( Configuration.admin_pwd ) );
 
         httpCache = new HttpCache( config.get( Configuration.cache_path ) );
         return asList(

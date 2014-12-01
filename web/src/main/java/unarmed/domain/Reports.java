@@ -116,7 +116,7 @@ public class Reports
                         res.getLong( "submitTime" ),
                         res.getString( "desc" ),
                         "N/A",
-                        res.getString( "link" ),
+                        res.getString( "links" ),
                         null,
                         (List<Map<String, Object>>)res.getObject( "attachments" ) ) );
             }

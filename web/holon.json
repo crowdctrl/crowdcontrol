@@ -1,6 +1,7 @@
 {
   "application" : {
     "name" : "unarmed",
+    "auto_redeploy" : true,
     "middleware" : [
       "holon.contrib.session.SimpleSessionMiddleware",
       "unarmed.web.middleware.TransactionMiddleware",
